@@ -24,8 +24,16 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "lint": "eslint src/**/*.ts{,x} --fix",
+    "prettier": "prettier --write \"**/*.+(ts|tsx)\"",
+    "commit-hook": "git add ."
   },
+  "pre-commit": [
+    "prettier",
+    "lint",
+    "commit-hook"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -45,6 +53,14 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.14"
+    "@types/styled-components": "^5.1.14",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.4.1"
   }
 }
