@@ -1,6 +1,6 @@
-import React from 'react';
-import { TodosContainer } from '@containers/'
+import React from "react";
+import { TodosContainer } from "@containers/";
 
-const App = () => <TodosContainer />
+const App = () => <TodosContainer />;
 
 export default App;
