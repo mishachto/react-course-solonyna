@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodosContainer } from './containers'
+import { TodosContainer } from '@containers/'
 
 const App = () => <TodosContainer />
 
