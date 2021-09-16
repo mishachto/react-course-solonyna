@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@containers/*": ["src/containers/index.ts"],
+            "@styles/*": ["src/styles/*"],
+            "@shared/*": ["src/shared/*"]
+        }
+    }
+}
