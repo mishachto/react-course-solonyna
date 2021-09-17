@@ -27,9 +27,11 @@
     "eject": "react-app-rewired eject",
     "lint": "eslint src/**/*.ts{,x} --fix",
     "prettier": "prettier --write \"**/*.+(ts|tsx)\"",
-    "commit-hook": "git add ."
+    "commit-hook": "git add .",
+    "stylelint-fix": "stylelint \"**/*.+(css|scss)\" --fix"
   },
   "pre-commit": [
+    "stylelint-fix",
     "prettier",
     "lint",
     "commit-hook"
