@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 import { TodosContainer } from "@containers/";
 
-const App = () => <TodosContainer />
+const App = () => <TodosContainer />;
 
 export default App;
 
-
-/// 
+///
 // let test: number | string = 100
 
 // type Tlast = string | null;
@@ -26,9 +25,6 @@ export default App;
 //   getAge: (a: string, b: number) => void
 // }
 
-
-
-
 // const obg: IObj[] = [{
 //   id: 1,
 //   age: 10,
@@ -40,4 +36,3 @@ export default App;
 
 //   }
 // }]
-

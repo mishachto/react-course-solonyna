@@ -21,7 +21,6 @@ const Todos = () => {
     },
   ]);
 
-
   return (
     <>
       {todos?.map(({ text, id, state, createDate }) => (
@@ -30,4 +29,4 @@ const Todos = () => {
     </>
   );
 };
-export default Todos
+export default Todos;
