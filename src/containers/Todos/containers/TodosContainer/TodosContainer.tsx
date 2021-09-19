@@ -1,20 +1,21 @@
 import React from "react";
-import {Header, Toodos} from "../../"
+import {Header, Todos, Filter, Footer} from "@containers/"
+import styles from './index.module.scss' 
 
 
 interface IComponentProps {
-    data: string;
+    data?: string;
 }
 
 
 
-const component = (props: IComponentProps) => {
-    return <div>
+const TodosContainer = (props: IComponentProps) => {
+    return <div className={styles.todosContainer}>
         {<Header />}
-        {<Toodos/>}
-        {/* {<Filter/>} */}
-        {/* {<Footer/>} */}
+        {<Todos/>}
+        {<Filter/>}
+        {<Footer/>}
 
     </div>
 }
-export default component;
+export default TodosContainer;

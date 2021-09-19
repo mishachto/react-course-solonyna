@@ -1,2 +1,4 @@
-export * from './Header'
-export * from './Toodos'
+export * from './Header';
+export * from './Todos';
+export * from './Filter';
+export * from './Footer';
