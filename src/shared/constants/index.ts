@@ -1,1 +1,1 @@
-export const TYPES: string[] = ["REQUEST", "SUCEESS", "FAILURE"];
+export const TYPES: string[] = ["REQUEST", "SUCCESS", "FAILURE"];

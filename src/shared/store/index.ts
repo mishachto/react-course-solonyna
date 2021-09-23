@@ -1,4 +1,4 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import rootReducer from "./rootReducer";
 import rootSagas from "./rootSaga";
 import { routerMiddleware } from "connected-react-router";
@@ -7,7 +7,7 @@ import { History, createBrowserHistory } from "history";
 import createSagaMiddleware from "redux-saga";
 
 const sagaMiddleware = createSagaMiddleware();
-const composer = composeWithDevTools({ trace: true, traceLimit: 25 })
+const composer = composeWithDevTools({ trace: true, traceLimit: 25 });
 export const history = createBrowserHistory();
 
 export const configureStore = (history: History) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import { useSelector } from "react-redux";
+import { getTodos } from "@containers/";
 interface ITodo {
   id: number;
   text: string;
@@ -8,33 +9,7 @@ interface ITodo {
 }
 
 const Todos = () => {
-  const [todos, setTodos] = useState<ITodo[]>([
-    {
-      id: 1,
-      text: "Test 001",
-      createAt: new Date(),
-      completed: false,
-    },
-  ]);
-
-  useEffect(() => {
-    setTodos((state) =>
-      state.concat([
-        {
-          id: 2,
-          text: "Test 002",
-          createAt: new Date(),
-          completed: false,
-        },
-        {
-          id: 3,
-          text: "Test 003",
-          createAt: new Date(),
-          completed: false,
-        },
-      ]),
-    );
-  }, []);
+  const todos = useSelector(getTodos());
 
   return (
     <>

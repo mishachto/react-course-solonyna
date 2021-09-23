@@ -1,12 +1,10 @@
-import { connectRouter } from "connected-react-router";
-// react-router /todos/123/test/123?qwe=qweqw
-// react-router-dom (core)
-// connected-react-router
+import { connectRouter, RouterState } from "connected-react-router";
 import { combineReducers, CombinedState, AnyAction } from "redux";
 import { History } from "history";
-import { todosReducer } from "../../containers/Todos/store/reducers";
+import { todosReducer, ITodosState } from "@containers/";
+import { IAppSstate } from "@shared/";
 
-type TReducer = CombinedState<any>;
+type TReducer = CombinedState<IAppSstate>;
 
 export default (history: History) => {
   const rootReducer = combineReducers({
@@ -16,6 +14,9 @@ export default (history: History) => {
   });
 
   return (state: TReducer | undefined, action: AnyAction) => {
-    return rootReducer(state, action);
+    return rootReducer(
+      state as CombinedState<{ todosReducer: ITodosState; router: RouterState<unknown> }> | undefined,
+      action,
+    );
   };
 };
