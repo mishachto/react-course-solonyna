@@ -3,7 +3,7 @@ import { Header, Todos, Filter, Footer } from "@containers/";
 import styles from "./index.module.scss";
 
 interface IComponentProps {
-  data?: string;
+  children?: React.ReactNode;
 }
 
 const TodosContainer = (props: IComponentProps) => {
@@ -12,7 +12,7 @@ const TodosContainer = (props: IComponentProps) => {
       {<Header />}
       {<Todos />}
       {<Filter />}
-      {/* {<Footer />} */}
+      {<Footer />}
     </div>
   );
 };

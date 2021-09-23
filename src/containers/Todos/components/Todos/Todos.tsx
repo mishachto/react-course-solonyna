@@ -1,29 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { Todo } from "@containers/";
 interface ITodo {
   id: number;
-  state: boolean;
   text: string;
-  createDate?: Date;
+  createAt: Date;
+  completed: boolean;
 }
 
 const Todos = () => {
-  const [todos] = useState<ITodo[]>([
+  const [todos, setTodos] = useState<ITodo[]>([
     {
       id: 1,
       text: "Test 001",
-      createDate: new Date(),
-      state: false,
-    },
-    {
-      id: 2,
-      text: "Test 002",
-      state: true,
+      createAt: new Date(),
+      completed: false,
     },
   ]);
 
+  useEffect(() => {
+    setTodos((state) =>
+      state.concat([
+        {
+          id: 2,
+          text: "Test 002",
+          createAt: new Date(),
+          completed: false,
+        },
+        {
+          id: 3,
+          text: "Test 003",
+          createAt: new Date(),
+          completed: false,
+        },
+      ]),
+    );
+  }, []);
+
   return (
     <>
-      {todos?.map(({ text, id, state, createDate }) => (
+      {todos?.map(({ text, id }) => (
         <div key={id}>{text}</div>
       ))}
     </>
