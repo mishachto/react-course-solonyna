@@ -4,7 +4,7 @@ import * as axios from "axios";
 
 function* fetchTodosSaga({ _, cb }: ReturnType<any>) {
   try {
-    // const data = yield call(axios.get('/todos'))
+    // const data = yield call(axios.get('/todos?order=ASC&sortBy=CreatedAt'))
     const todos = [
       {
         id: 1,
@@ -19,7 +19,8 @@ function* fetchTodosSaga({ _, cb }: ReturnType<any>) {
         completed: false,
       },
     ];
-
+    // UI -> (action.request) -> reducer(loader: true)
+    //                        -> saga(request to BE -> data) -> (action.success) -> reducer(loader: false, todos) -> UI
     yield put(todosActions.FETCH_TODOS.SUCCESS(todos));
   } catch (err) {
     yield put(todosActions.FETCH_TODOS.FAILURE(err as Object));
@@ -30,7 +31,8 @@ function* fetchTodosSaga({ _, cb }: ReturnType<any>) {
 
 function* fetchTodoSaga({ payload, cb }: ReturnType<any>) {
   try {
-    // const data = yield call(axios.get(`/todos/${payload.id}`), payload)
+    // http://localhost:300/api/todos/124234
+    // const data = yield call(axios.get(`/todos/${payload.id}`))
     const todo = {
       id: 3,
       text: "Text 003",

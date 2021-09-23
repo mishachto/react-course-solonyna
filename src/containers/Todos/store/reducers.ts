@@ -23,17 +23,17 @@ export const todosReducer: IReducer<ITodosState> = (state: ITodosState = initial
     case todosActionTypes.FETCH_TODO.SUCCESS:
       return { ...state, loading: false, todo: action.payload };
 
-    case todosActionTypes.ADD_TODOS.SUCCESS:
+    case todosActionTypes.ADD_TODO.SUCCESS:
       return { ...state, loading: false, todos: [...state.todos].concat(action.payload) };
 
-    case todosActionTypes.EDIT_TODOS.SUCCESS:
+    case todosActionTypes.EDIT_TODO.SUCCESS:
       return {
         ...state,
         loading: false,
         todos: [...state.todos].map((todo) => (todo.id === action.payload.id ? action.payload : todo)),
       };
 
-    case todosActionTypes.REMOVE_TODOS.SUCCESS:
+    case todosActionTypes.REMOVE_TODO.SUCCESS:
       return { ...state, loading: false, todos: [...state.todos].filter((todo) => todo.id !== action.payload) };
 
     case todosActionTypes.FETCH_TODOS.FAILURE:
