@@ -1,11 +1,7 @@
 import { createSelector } from "reselect";
-import { ITodosState } from "@containers/";
+import { IAppSstate } from "@shared/";
 
-interface IAppSstate {
-  todos: ITodosState;
-}
-
-const selectTodos = (state: IAppSstate) => state.todos;
+const selectTodos = (state: IAppSstate) => state.todosReducer;
 
 export const getTodos = () => createSelector(selectTodos, (state) => state.todos);
 export const getTodo = () => createSelector(selectTodos, (state) => state.todo);

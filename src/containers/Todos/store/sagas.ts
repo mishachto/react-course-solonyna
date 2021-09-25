@@ -2,9 +2,9 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { todosActionTypes, todosActions } from "@containers/";
 import * as axios from "axios";
 
-function* fetchTodosSaga({ _, cb }: ReturnType<any>) {
+function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
   try {
-    // const data = yield call(axios.get('/todos'))
+    // const data = yield call(axios.get('/todos?order=ASC&sortBy=CreatedAt'))
     const todos = [
       {
         id: 1,
@@ -19,7 +19,8 @@ function* fetchTodosSaga({ _, cb }: ReturnType<any>) {
         completed: false,
       },
     ];
-
+    // UI -> (action.request) -> reducer(loader: true)
+    //                        -> saga(request to BE -> data) -> (action.success) -> reducer(loader: false, todos) -> UI
     yield put(todosActions.FETCH_TODOS.SUCCESS(todos));
   } catch (err) {
     yield put(todosActions.FETCH_TODOS.FAILURE(err as Object));
@@ -28,9 +29,10 @@ function* fetchTodosSaga({ _, cb }: ReturnType<any>) {
   }
 }
 
-function* fetchTodoSaga({ payload, cb }: ReturnType<any>) {
+function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosActions.FETCH_TODO.REQUEST>) {
   try {
-    // const data = yield call(axios.get(`/todos/${payload.id}`), payload)
+    // http://localhost:300/api/todos/124234
+    // const data = yield call(axios.get(`/todos/${payload.id}`))
     const todo = {
       id: 3,
       text: "Text 003",
@@ -45,7 +47,7 @@ function* fetchTodoSaga({ payload, cb }: ReturnType<any>) {
   }
 }
 
-function* addTodoSaga({ payload, cb }: ReturnType<any>) {
+function* addTodoSaga({ payload, cb }: ReturnType<typeof todosActions.ADD_TODO.REQUEST>) {
   try {
     // const data = yield call(axios.post(`/todos`, payload))
     const newTodo = {
@@ -62,7 +64,7 @@ function* addTodoSaga({ payload, cb }: ReturnType<any>) {
   }
 }
 
-function* editTodoSaga({ payload, cb }: ReturnType<any>) {
+function* editTodoSaga({ payload, cb }: ReturnType<typeof todosActions.EDIT_TODO.REQUEST>) {
   try {
     // const { id, ...rest } = payload
     // const data = yield call(axios.put(`/todos/${id}`, rest))
@@ -80,7 +82,7 @@ function* editTodoSaga({ payload, cb }: ReturnType<any>) {
   }
 }
 
-function* removeTodoSaga({ payload, cb }: ReturnType<any>) {
+function* removeTodoSaga({ payload, cb }: ReturnType<typeof todosActions.REMOVE_TODO.REQUEST>) {
   try {
     // const data = yield call(axios.delete(`/todos/${payload.id}`))
     const removeTodoId = 5;
@@ -95,7 +97,7 @@ function* removeTodoSaga({ payload, cb }: ReturnType<any>) {
 export const todosWatcherSaga = function* () {
   yield takeLatest(todosActionTypes.FETCH_TODOS.REQUEST, fetchTodosSaga);
   yield takeLatest(todosActionTypes.FETCH_TODO.REQUEST, fetchTodoSaga);
-  yield takeLatest(todosActionTypes.FETCH_TODOS.REQUEST, addTodoSaga);
-  yield takeLatest(todosActionTypes.FETCH_TODOS.REQUEST, editTodoSaga);
-  yield takeLatest(todosActionTypes.FETCH_TODOS.REQUEST, removeTodoSaga);
+  yield takeLatest(todosActionTypes.ADD_TODO.REQUEST, addTodoSaga);
+  yield takeLatest(todosActionTypes.EDIT_TODO.REQUEST, editTodoSaga);
+  yield takeLatest(todosActionTypes.REMOVE_TODO.REQUEST, removeTodoSaga);
 };
