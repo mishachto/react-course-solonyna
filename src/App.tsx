@@ -1,14 +1,19 @@
 import React, { useEffect } from "react";
-import { TodosContainer, todosActions } from "@containers/";
+import { TodosContainer, todosActions, actionsUsers, } from "@containers/";
 import { useDispatch } from "react-redux";
+import Users from "./containers/Users/components/Users/users";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(todosActions.FETCH_TODOS.REQUEST());
+    dispatch(actionsUsers.FETCH_USERS.REQUEST())
   }, [dispatch]);
-  return <TodosContainer />;
+  return <>
+    <Users />
+    <TodosContainer />;
+  </>
 };
 
 export default App;

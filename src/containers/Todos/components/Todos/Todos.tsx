@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getTodos, getTodo } from "@containers/";
-interface ITodo {
-  id: number;
-  text: string;
-  createAt: Date;
-  completed: boolean;
-}
 //@ts-ignore
 
 const Todos = () => {

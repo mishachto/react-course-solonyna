@@ -2,7 +2,7 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { todosActionTypes, todosActions } from "@containers/";
 import * as axios from "axios";
 
-function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
+function* fetchTodosSaga({ cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
   try {
     // const data = yield call(axios.get('/todos?order=ASC&sortBy=CreatedAt'))
     const todos = [
@@ -29,10 +29,12 @@ function* fetchTodosSaga({ _, cb }: ReturnType<typeof todosActions.FETCH_TODOS.R
   }
 }
 
+
+
 function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosActions.FETCH_TODO.REQUEST>) {
   try {
     // http://localhost:300/api/todos/124234
-    // const data = yield call(axios.get(`/todos/${payload.id}`))
+    // const todo = yield call(axios.get(`/todos/${payload.id}`))
     const todo = {
       id: 3,
       text: "Text 003",
