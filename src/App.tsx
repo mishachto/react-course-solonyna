@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TodosContainer, todosActions, actionsUsers, } from "@containers/";
+import { TodosContainer, todosActions, actionsUsers } from "@containers/";
 import { useDispatch } from "react-redux";
 import Users from "./containers/Users/components/Users/users";
 
@@ -8,12 +8,14 @@ const App = () => {
 
   useEffect(() => {
     dispatch(todosActions.FETCH_TODOS.REQUEST());
-    dispatch(actionsUsers.FETCH_USERS.REQUEST())
+    dispatch(actionsUsers.FETCH_USERS.REQUEST());
   }, [dispatch]);
-  return <>
-    <Users />
-    <TodosContainer />;
-  </>
+  return (
+    <>
+      <Users />
+      <TodosContainer />;
+    </>
+  );
 };
 
 export default App;

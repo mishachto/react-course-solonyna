@@ -10,7 +10,7 @@ function* fetchTodosSaga({ cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQU
         id: 1,
         text: "Text 001",
         createAt: new Date(),
-        completed: false,
+        completed: true,
       },
       {
         id: 2,
@@ -28,8 +28,6 @@ function* fetchTodosSaga({ cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQU
     cb?.();
   }
 }
-
-
 
 function* fetchTodoSaga({ payload, cb }: ReturnType<typeof todosActions.FETCH_TODO.REQUEST>) {
   try {
