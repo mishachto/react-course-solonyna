@@ -5,3 +5,7 @@ export interface IAppSstate {
   usersReducer: IUserState;
 }
 
+export enum EOrder {
+  ASC = "ASC",
+  DESC = "DESC",
+}

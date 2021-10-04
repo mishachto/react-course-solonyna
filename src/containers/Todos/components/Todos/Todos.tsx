@@ -8,8 +8,11 @@ const Todos = () => {
   const todo = useSelector(getTodo());
   return (
     <>
-      {todos?.map(({ text, id }) => (
-        <div key={id}>{text}</div>
+      {todos?.map(({ text, id, completed }) => (
+        <div key={id}>
+          <input type="checkbox" defaultChecked={completed} />
+          {text}
+        </div>
       ))}
       <button></button>
     </>

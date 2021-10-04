@@ -1,4 +1,9 @@
 @import "@styles/style.scss";
 .todosContainer {
-  background-color: $color-second;
+  max-width: 700px;
+  margin: 50px auto;
+  border-radius: 5px;
+  border: 1px solid #999 ;
+  font-size: 18px;
+
 }

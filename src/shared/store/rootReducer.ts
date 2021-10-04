@@ -16,7 +16,9 @@ export default (history: History) => {
 
   return (state: TReducer | undefined, action: AnyAction) => {
     return rootReducer(
-      state as CombinedState<{ todosReducer: ITodosState; usersReducer: IUserState, router: RouterState<unknown> }> | undefined,
+      state as
+        | CombinedState<{ todosReducer: ITodosState; usersReducer: IUserState; router: RouterState<unknown> }>
+        | undefined,
       action,
     );
   };
