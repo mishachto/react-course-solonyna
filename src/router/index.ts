@@ -1,3 +1,5 @@
-export * from "./pivateRouter";
+export * from "./privateRouter";
 export * from "./publicRouter";
-export * from "./constans";
+export * from "./constants";
+export * from "./routerAssessor";
+export * from "./requireAuth";

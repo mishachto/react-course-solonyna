@@ -1,35 +1,44 @@
-export const publicRouter = [{
-    path: "/login",
+import { ROUTER_PATH } from "./constants";
+
+export const publicRouter = [
+  {
+    path: ROUTER_PATH.LOGIN,
     component: null,
     exact: true,
+    children: [],
     icon: "",
-    title: "",
-},
-{
-    path: "/register",
+    label: "",
+  },
+  {
+    path: ROUTER_PATH.REGISTRATION,
     component: null,
     exact: true,
+    children: [],
     icon: "",
-    title: "",
-},
-{
-    path: "/reset-passwor/:token",
+    label: "",
+  },
+  {
+    path: `${ROUTER_PATH.RESET}/:token`,
     component: null,
     exact: true,
+    children: [],
     icon: "",
-    title: "",
-},
-{
-    path: "/forgot-passwor",
+    label: "",
+  },
+  {
+    path: ROUTER_PATH.FORGOT,
     component: null,
     exact: true,
+    children: [],
     icon: "",
-    title: "",
-}, {
-    path: "/activation/:token",
+    label: "",
+  },
+  {
+    path: `${ROUTER_PATH.ACTIVATION}/:token`,
     component: null,
     exact: true,
+    children: [],
     icon: "",
-    title: "",
-}
-]
+    label: "",
+  },
+];

@@ -5,7 +5,7 @@ import * as axios from "axios";
 function* fetchUsersSaga({ cb }: ReturnType<typeof actionsUsers.FETCH_USERS.REQUEST>) {
   try {
     // const data = yield call(axios.get('/todos?order=ASC&sortBy=CreatedAt'))
-    const{ search, order, sortBy} = yield select(getUserFilterSettings);
+    const { search, order, sortBy } = yield select(getUserFilterSettings);
     const users = [
       {
         id: 101,

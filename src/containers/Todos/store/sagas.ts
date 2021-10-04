@@ -1,27 +1,28 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { todosActionTypes, todosActions } from "@containers/";
-import * as axios from "axios";
+import axios from "axios";
+import { ITodo } from ".";
 
-function* fetchTodosSaga({ cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
+function* fetchTodosSaga({  cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
   try {
-    // const data = yield call(axios.get('/todos?order=ASC&sortBy=CreatedAt'))
-    const todos = [
-      {
-        id: 1,
-        text: "Text 001",
-        createAt: new Date(),
-        completed: true,
-      },
-      {
-        id: 2,
-        text: "Text 002",
-        createAt: new Date(),
-        completed: false,
-      },
-    ];
+    const { data }: { data: ITodo[] } = yield call(() => axios.get("https://jsonplaceholder.typicode.com/todos"));
+    // const todos = [
+    //   {
+    //     id: 1,
+    //     text: "Text 001",
+    //     createAt: new Date(),
+    //     completed: true,
+    //   },
+    //   {
+    //     id: 2,
+    //     text: "Text 002",
+    //     createAt: new Date(),
+    //     completed: false,
+    //   },
+    // ];
     // UI -> (action.request) -> reducer(loader: true)
     //                        -> saga(request to BE -> data) -> (action.success) -> reducer(loader: false, todos) -> UI
-    yield put(todosActions.FETCH_TODOS.SUCCESS(todos));
+    yield put(todosActions.FETCH_TODOS.SUCCESS(data));
   } catch (err) {
     yield put(todosActions.FETCH_TODOS.FAILURE(err as Object));
   } finally {
