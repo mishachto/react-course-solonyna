@@ -1,8 +1,9 @@
-import { ITodosState, IUserState } from "@containers/";
+import { ITodosState, IUserState, IAuthState } from "@containers/";
 
 export interface IAppSstate {
   todosReducer: ITodosState;
   usersReducer: IUserState;
+  authReducer: IAuthState;
 }
 
 export enum EOrder {

@@ -3,7 +3,7 @@ import { todosActionTypes, todosActions } from "@containers/";
 import axios from "axios";
 import { ITodo } from ".";
 
-function* fetchTodosSaga({  cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
+function* fetchTodosSaga({ cb }: ReturnType<typeof todosActions.FETCH_TODOS.REQUEST>) {
   try {
     const { data }: { data: ITodo[] } = yield call(() => axios.get("https://jsonplaceholder.typicode.com/todos"));
     // const todos = [
