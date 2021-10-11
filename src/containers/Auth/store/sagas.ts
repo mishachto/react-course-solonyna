@@ -68,10 +68,11 @@ function* resetAuthSaga({ payload, cb }: ReturnType<typeof authorActions.RESET_P
 }
 
 export const authWatcherSaga = function* () {
-  yield takeLatest(authorActions.SIGN_IN.REQUEST, singInAuthSaga);
-  yield takeLatest(authorActions.SIGN_UP.REQUEST, singUpAuthSaga);
-  yield takeLatest(authorActions.RESET_PASSWORD.REQUEST, resetAuthSaga);
-  yield takeLatest(authorActions.FORGOT_PASSWORD.REQUEST, forgotAuthSaga);
-  yield takeLatest(authorActions.ACCOUNT_ACTIVATION.REQUEST, acountActivateAuthSaga);
+  yield takeLatest(authActionTypes.SIGN_IN.REQUEST, singInAuthSaga);
+  yield takeLatest(authActionTypes.SIGN_UP.REQUEST, singUpAuthSaga);
+  yield takeLatest(authActionTypes.RESET_PASSWORD.REQUEST, resetAuthSaga);
+  yield takeLatest(authActionTypes.FORGOT_PASSWORD.REQUEST, forgotAuthSaga);
+  yield takeLatest(authActionTypes.ACCOUNT_ACTIVATION.REQUEST, acountActivateAuthSaga);
   // yield takeLatest(authorActions.SIGN_OUT.REQUEST, singUpAuthSaga);
 };
+
