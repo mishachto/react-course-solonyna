@@ -1,22 +1,38 @@
 import React, { useEffect } from "react";
-import { TodosContainer, todosActions, actionsUsers, SingUP } from "@containers/";
+// import { TodosContainer, todosActions, actionsUsers, SingUP } from "@containers/";
 import { useDispatch } from "react-redux";
 import Users from "./containers/Users/components/Users/users";
+import { Redirect, Switch, Router, Route } from "react-router";
+import { ROUTER_PATH } from "./router";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "./shared";
+import { Activation, SingUP } from "./containers";
 
+// const App = () => {
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     dispatch(todosActions.FETCH_TODOS.REQUEST());
+//     dispatch(actionsUsers.FETCH_USERS.REQUEST());
+//   }, [dispatch]);
+//   return (
+//     <>
+//       {/* <Users />
+//       <TodosContainer />; */}
+
+//       <SingUP />
+//     </>
+//   );
+// };
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(todosActions.FETCH_TODOS.REQUEST());
-    dispatch(actionsUsers.FETCH_USERS.REQUEST());
-  }, [dispatch]);
   return (
-    <>
-      {/* <Users />
-      <TodosContainer />; */}
-
-      <SingUP />
-    </>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route component={SingUP} exact={true} path={ROUTER_PATH.REGISTRATION} />
+        <Route component={Activation} exact={true} path={ROUTER_PATH.ACTIVATION} />
+        <Redirect to={ROUTER_PATH.REGISTRATION} />
+      </Switch>
+    </ConnectedRouter>
   );
 };
 

@@ -1,6 +1,9 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { authActionTypes, authorActions, IUser } from "@containers/";
 import axios from "axios";
+import { ROUTER_PATH } from "../../../router";
+
+import { push } from "connected-react-router"
 
 function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_IN.REQUEST>) {
   try {
@@ -18,9 +21,13 @@ function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_I
 
 function* singUpAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_UP.REQUEST>) {
   try {
+
+    // console.log(payload)
     // payload = email
     // yield call(() => axios.post("URL", payload))
-    yield put(authorActions.SIGN_UP.SUCCESS());
+    // yield put(authorActions.SIGN_UP.SUCCESS());
+    // console.log(ROUTER_PATH.ACTIVATION);
+    yield put(push(ROUTER_PATH.ACTIVATION));
   } catch (err) {
     yield put(authorActions.SIGN_UP.FAILURE(err as Object));
   } finally {
@@ -41,12 +48,14 @@ function* acountActivateAuthSaga({ payload, cb }: ReturnType<typeof authorAction
   }
 }
 
+
+
 function* forgotAuthSaga({ payload, cb }: ReturnType<typeof authorActions.FORGOT_PASSWORD.REQUEST>) {
   try {
     // payload мыло
 
     // yield call(() => axios.post("URL", payload))
-    yield put(authorActions.FORGOT_PASSWORD.SUCCESS());
+    // yield put(authorActions.FORGOT_PASSWORD.SUCCESS());
   } catch (err) {
     yield put(authorActions.FORGOT_PASSWORD.FAILURE(err as Object));
   } finally {

@@ -1,3 +1,4 @@
+import { SingUP, Activation } from "../containers/Auth/components/";
 import { ROUTER_PATH } from "./constants";
 
 export const publicRouter = [
@@ -11,7 +12,7 @@ export const publicRouter = [
   },
   {
     path: ROUTER_PATH.REGISTRATION,
-    component: null,
+    component: SingUP,
     exact: true,
     children: [],
     icon: "",
@@ -35,7 +36,7 @@ export const publicRouter = [
   },
   {
     path: `${ROUTER_PATH.ACTIVATION}/:token`,
-    component: null,
+    component: Activation,
     exact: true,
     children: [],
     icon: "",
