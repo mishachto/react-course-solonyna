@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TodosContainer, todosActions, actionsUsers } from "@containers/";
+import { TodosContainer, todosActions, actionsUsers, SingUP } from "@containers/";
 import { useDispatch } from "react-redux";
 import Users from "./containers/Users/components/Users/users";
 
@@ -12,8 +12,10 @@ const App = () => {
   }, [dispatch]);
   return (
     <>
-      <Users />
-      <TodosContainer />;
+      {/* <Users />
+      <TodosContainer />; */}
+
+      <SingUP />
     </>
   );
 };
