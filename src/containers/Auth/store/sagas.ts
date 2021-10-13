@@ -3,7 +3,13 @@ import { authActionTypes, authorActions, IUser } from "@containers/";
 import axios from "axios";
 import { ROUTER_PATH } from "../../../router";
 
-import { push } from "connected-react-router"
+import { push } from "connected-react-router";
+
+const userRegister: any = {
+  email: "ww@ww.ww",
+  password: "www",
+  token: 111,
+};
 
 function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_IN.REQUEST>) {
   try {
@@ -12,8 +18,27 @@ function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_I
     //  const = {user} = decoded ;
     // });
     // yield put(authorActions.SIGN_IN.SUCCESS(data));
-  } catch (err) {
-    yield put(authorActions.SIGN_IN.FAILURE(err as Object));
+    if (payload.email == userRegister.email && payload.password == userRegister.password) {
+      const data = {
+        token: userRegister.token,
+        user: {
+          id: 101,
+          firstName: "name-1",
+          lastName: "last-name-1",
+          eMail: "ww@ww.ww",
+          isActive: true,
+          avatar: "",
+          acl: "MANAGER",
+        },
+      };
+      yield put(authorActions.SIGN_IN.SUCCESS(data));
+      yield put(push(ROUTER_PATH.TODOS));
+    } else {
+      alert("ERROR try: email: ww@ww.ww password: www");
+      yield put(authorActions.SIGN_IN.FAILURE("error"));
+    }
+    // } catch (err) {
+    //   yield put(authorActions.SIGN_IN.FAILURE(err as Object));
   } finally {
     cb?.();
   }
@@ -21,7 +46,6 @@ function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_I
 
 function* singUpAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_UP.REQUEST>) {
   try {
-
     // console.log(payload)
     // payload = email
     // yield call(() => axios.post("URL", payload))
@@ -40,7 +64,9 @@ function* acountActivateAuthSaga({ payload, cb }: ReturnType<typeof authorAction
     // payload вся инфа
 
     // yield call(() => axios.post("URL", payload))
-    yield put(authorActions.SIGN_UP.REQUEST({ email: payload.email, password: payload.password }));
+    console.log(payload);
+
+    yield put(authorActions.SIGN_IN.REQUEST({ email: payload.email, password: payload.password }));
   } catch (err) {
     yield put(authorActions.ACCOUNT_ACTIVATION.FAILURE(err as Object));
   } finally {
@@ -48,12 +74,9 @@ function* acountActivateAuthSaga({ payload, cb }: ReturnType<typeof authorAction
   }
 }
 
-
-
 function* forgotAuthSaga({ payload, cb }: ReturnType<typeof authorActions.FORGOT_PASSWORD.REQUEST>) {
   try {
     // payload мыло
-
     // yield call(() => axios.post("URL", payload))
     // yield put(authorActions.FORGOT_PASSWORD.SUCCESS());
   } catch (err) {
@@ -84,4 +107,3 @@ export const authWatcherSaga = function* () {
   yield takeLatest(authActionTypes.ACCOUNT_ACTIVATION.REQUEST, acountActivateAuthSaga);
   // yield takeLatest(authorActions.SIGN_OUT.REQUEST, singUpAuthSaga);
 };
-

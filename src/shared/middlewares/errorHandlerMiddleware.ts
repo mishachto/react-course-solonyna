@@ -1,5 +1,5 @@
 import { Dispatch, AnyAction } from "redux";
-import { todosActionTypes } from "@containers/";
+import { authActionTypes, todosActionTypes } from "@containers/";
 import { ACTION_FAILURE_REQUEST, IAppSstate } from "@shared/";
 import { useReducer } from "react";
 
@@ -8,7 +8,7 @@ export const errorHandlerMiddleware = (data: { getState: () => IAppSstate; dispa
   return (next: (action: AnyAction) => void) => (action: AnyAction) => {
     const { payload, type } = action;
 
-    const commonActionTypes = { ...todosActionTypes };
+    const commonActionTypes = { ...todosActionTypes, ...authActionTypes };
     const onlyFailureActionTypes = Object.values(commonActionTypes).map((type) => type.FAILURE);
 
     if (onlyFailureActionTypes.includes(type)) {

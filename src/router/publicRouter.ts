@@ -1,10 +1,10 @@
-import { SingUP, Activation } from "../containers/Auth/components/";
+import { SingUP, Activation, SingIn } from "../containers/Auth/components/";
 import { ROUTER_PATH } from "./constants";
 
 export const publicRouter = [
   {
     path: ROUTER_PATH.LOGIN,
-    component: null,
+    component: SingIn,
     exact: true,
     children: [],
     icon: "",
