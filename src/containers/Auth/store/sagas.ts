@@ -31,8 +31,8 @@ function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_I
           acl: "MANAGER",
         },
       };
+      localStorage.setItem("authUser", userRegister.token)
       yield put(authorActions.SIGN_IN.SUCCESS(data));
-      yield put(push(ROUTER_PATH.TODOS));
     } else {
       alert("ERROR try: email: ww@ww.ww password: www");
       yield put(authorActions.SIGN_IN.FAILURE("error"));
