@@ -21,7 +21,6 @@ const data = {
   },
 };
 
-
 export default (ComposedComponent: any) => {
   return (props: any) => {
     const isAuthenticated = useSelector(getAuthUser());
@@ -30,7 +29,7 @@ export default (ComposedComponent: any) => {
       const token = localStorage.getItem("authUser");
       if (token) {
         if (Number(token) === 111) {
-          data.token = token
+          data.token = token;
           dispatch(authorActions.SIGN_IN.SUCCESS(data));
         }
       }

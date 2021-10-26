@@ -1,0 +1,25 @@
+@import "@styles/style.scss";
+.header{
+padding: 15px 0;
+    .box_header{
+        display: flex;
+        align-items: center;
+        justify-content:  space-between;
+        .box_button{
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px;
+            a{
+                text-transform: capitalize;
+                color: black;
+            }
+        }
+        .logo{
+            font-weight: bold;
+            font-size: 24px;
+        }
+    }
+}
+
+
+

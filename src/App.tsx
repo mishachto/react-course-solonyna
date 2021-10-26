@@ -1,30 +1,13 @@
 import React, { useEffect, useMemo } from "react";
 // import { TodosContainer,  } from "@containers/";
 import { useDispatch, useSelector } from "react-redux";
-import Users from "./containers/Users/components/Users/users";
 import { Redirect, Switch, Router, Route } from "react-router";
 import { RequireAuthHOC, ROUTER_PATH } from "./router";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./shared";
 import { Activation, SingUP, todosActions, actionsUsers, SingIn, TodosContainer, getAuthUser } from "./containers";
-import { ObjectSchema } from "yup";
 
-// const App = () => {
-//   const dispatch = useDispatch();
 
-//   useEffect(() => {
-//     dispatch(todosActions.FETCH_TODOS.REQUEST());
-//     dispatch(actionsUsers.FETCH_USERS.REQUEST());
-//   }, [dispatch]);
-//   return (
-//     <>
-//       {/* <Users />
-//       <TodosContainer />; */}
-
-//       <SingUP />
-//     </>
-//   );
-// };
 
 const App = () => {
   const userAuth = useSelector(getAuthUser());
@@ -48,7 +31,7 @@ const App = () => {
           <Route component={SingIn} exact={true} path={ROUTER_PATH.LOGIN} />
           <Route component={SingUP} exact={true} path={ROUTER_PATH.REGISTRATION} />
           <Route component={Activation} exact={true} path={ROUTER_PATH.ACTIVATION} />
-             <Redirect to={ROUTER_PATH.LOGIN} />
+          <Redirect to={ROUTER_PATH.LOGIN} />
         </Switch>
       );
     }
@@ -58,6 +41,24 @@ const App = () => {
 };
 
 export default RequireAuthHOC(App);
+
+
+// const App = () => {
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     dispatch(todosActions.FETCH_TODOS.REQUEST());
+//     dispatch(actionsUsers.FETCH_USERS.REQUEST());
+//   }, [dispatch]);
+//   return (
+//     <>
+//       {/* <Users />
+//       <TodosContainer />; */}
+
+//       <SingUP />
+//     </>
+//   );
+// };
 
 ///
 // let test: number | string = 100

@@ -31,7 +31,7 @@ function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_I
           acl: "MANAGER",
         },
       };
-      localStorage.setItem("authUser", userRegister.token)
+      localStorage.setItem("authUser", userRegister.token);
       yield put(authorActions.SIGN_IN.SUCCESS(data));
     } else {
       alert("ERROR try: email: ww@ww.ww password: www");
@@ -99,11 +99,23 @@ function* resetAuthSaga({ payload, cb }: ReturnType<typeof authorActions.RESET_P
   }
 }
 
+function* logoutAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_OUT.REQUEST>) {
+  try {
+    localStorage.setItem("authUser", "");
+    yield put(authorActions.SIGN_OUT.SUCCESS());
+  } catch (err) {
+    yield put(authorActions.SIGN_OUT.FAILURE(err as Object));
+  } finally {
+    cb?.();
+  }
+}
+
+
 export const authWatcherSaga = function* () {
   yield takeLatest(authActionTypes.SIGN_IN.REQUEST, singInAuthSaga);
   yield takeLatest(authActionTypes.SIGN_UP.REQUEST, singUpAuthSaga);
   yield takeLatest(authActionTypes.RESET_PASSWORD.REQUEST, resetAuthSaga);
   yield takeLatest(authActionTypes.FORGOT_PASSWORD.REQUEST, forgotAuthSaga);
   yield takeLatest(authActionTypes.ACCOUNT_ACTIVATION.REQUEST, acountActivateAuthSaga);
-  // yield takeLatest(authorActions.SIGN_OUT.REQUEST, singUpAuthSaga);
+  yield takeLatest(authActionTypes.SIGN_OUT.REQUEST, logoutAuthSaga);
 };

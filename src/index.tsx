@@ -4,13 +4,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { configureStore, history } from "@shared/";
+import { HeaderMain } from "./containers";
+import styled from "./index.module.scss";
 
 const { store } = configureStore(history);
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HeaderMain />
+      <div className={styled.container}>
+        <App />
+      </div>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root"),
