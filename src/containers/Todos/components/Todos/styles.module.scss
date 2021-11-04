@@ -1,0 +1,6 @@
+@import '../../../../styles-scss/style.scss';
+
+.todos {
+    height: calc(100% - 115px);
+    overflow: auto;
+}

@@ -1,5 +1,7 @@
 export * from "./Header";
 export * from "./Todos";
-export * from "./Filter";
+export * from "./Filters";
 export * from "./Footer";
-// export * from "./Todo";
+export * from "./AddNewTodo";
+export * from "./Todo";
+

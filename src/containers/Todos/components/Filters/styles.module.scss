@@ -1,0 +1,27 @@
+@import '../../../../styles-scss/style.scss';
+
+.filters {
+    // @include font(14px, normal, 24px, rgba(77, 77, 77, 1), normal, $global-font-family);
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-top: 1px solid rgba(77, 77, 77, 0.2);
+
+    .selectedItems {
+        width: 150px;
+        position: absolute;
+        left: 10px;
+    }
+    
+    .filter {
+        display: flex;
+        
+        > div {
+            margin: 0px 10px;
+            cursor: pointer;
+        }
+    }
+}

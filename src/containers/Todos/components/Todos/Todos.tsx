@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useRef } from "react";
 import { useSelector } from "react-redux";
-import { getTodos, getTodo } from "@containers/";
-//@ts-ignore
-
+import { getFilteredTodos, Todo } from "@containers/";
+import styles from "./styles.module.scss";
 const Todos = () => {
-  const todos = useSelector(getTodos());
-  const todo = useSelector(getTodo());
-  return (
-    <>
-      {todos?.map(({ title, id, completed }) => (
-        <div key={id}>
-          <input type="checkbox" defaultChecked={completed} />
-          {title}
-        </div>
-      ))}
-      <button></button>
-    </>
-  );
+  const todos = useSelector(getFilteredTodos());
+
+  const renderTodos = useMemo(() => {
+    return todos?.map((todoProps) => <Todo key={todoProps.id} {...todoProps} />);
+  }, [todos]);
+
+  return <div className={styles.todos}>{renderTodos}</div>;
 };
 
 // interface ITodosState {
