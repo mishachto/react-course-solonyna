@@ -7,8 +7,6 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "./shared";
 import { Activation, SingUP, todosActions, actionsUsers, SingIn, TodosContainer, getAuthUser } from "./containers";
 
-
-
 const App = () => {
   const userAuth = useSelector(getAuthUser());
   const dispatch = useDispatch();
@@ -41,7 +39,6 @@ const App = () => {
 };
 
 export default RequireAuthHOC(App);
-
 
 // const App = () => {
 //   const dispatch = useDispatch();

@@ -12,7 +12,7 @@ const TodosContainer = (props: IComponentProps) => {
       {<Header />}
       <AddNewTodo />
       {<Todos />}
-      
+
       {<Filters />}
       {<Footer />}
     </div>

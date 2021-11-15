@@ -8,7 +8,7 @@ const initialstate: IAuthState = {
   authUser: null,
   isAuthentificate: false,
   token: null,
-  modal: false
+  modal: false,
 };
 
 export const authReducer: IReducer<IAuthState> = (state: IAuthState = initialstate, action) => {
@@ -25,7 +25,7 @@ export const authReducer: IReducer<IAuthState> = (state: IAuthState = initialsta
     case authActionTypes.SIGN_IN.SUCCESS:
     case authActionTypes.ACCOUNT_ACTIVATION.SUCCESS:
       const { user, token } = action.payload;
-      localStorage.setItem("authUser", action.payload)
+      localStorage.setItem("authUser", action.payload);
       return {
         ...state,
         loading: false,

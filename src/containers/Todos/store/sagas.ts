@@ -53,8 +53,8 @@ function* removeTodoSaga({ payload, cb }: ReturnType<typeof todosActions.REMOVE_
 
 function* editTodoSaga({ payload, cb }: ReturnType<typeof todosActions.EDIT_TODO.REQUEST>) {
   try {
-    const { id, ...rest } = payload
-    const { data } = yield call(() => axios.put(`http://localhost:8062/api/todos/${id}`, rest))
+    const { id, ...rest } = payload;
+    const { data } = yield call(() => axios.put(`http://localhost:8062/api/todos/${id}`, rest));
 
     yield put(todosActions.EDIT_TODO.SUCCESS(data));
   } catch (err) {
@@ -63,8 +63,6 @@ function* editTodoSaga({ payload, cb }: ReturnType<typeof todosActions.EDIT_TODO
     cb?.();
   }
 }
-
-
 
 export const todosWatcherSaga = function* () {
   yield takeLatest(todosActionTypes.FETCH_TODOS.REQUEST, fetchTodosSaga);
