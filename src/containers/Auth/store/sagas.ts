@@ -2,43 +2,21 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import { authActionTypes, authorActions, IUser } from "@containers/";
 import axios from "axios";
 import { ROUTER_PATH } from "../../../router";
-
+import * as jwt from 'jsonwebtoken';
 import { push } from "connected-react-router";
 
-const userRegister: any = {
-  email: "ww@ww.ww",
-  password: "www",
-  token: 111,
-};
+const secretKey = "asd23j34jf983jfoiqwej98d342q09gfqkw";
 
 function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_IN.REQUEST>) {
   try {
-    // const { token } = yield call(() => axios.post("URL", payload))
-    // jwt.verify(token, 'Secret_key', function(err, decoded) {
-    //  const = {user} = decoded ;
-    // });
-    // yield put(authorActions.SIGN_IN.SUCCESS(data));
-    if (payload.email == userRegister.email && payload.password == userRegister.password) {
-      const data = {
-        token: userRegister.token,
-        user: {
-          id: 101,
-          firstName: "name-1",
-          lastName: "last-name-1",
-          eMail: "ww@ww.ww",
-          isActive: true,
-          avatar: "",
-          acl: "MANAGER",
-        },
-      };
-      localStorage.setItem("authUser", userRegister.token);
-      yield put(authorActions.SIGN_IN.SUCCESS(data));
-    } else {
-      alert("ERROR try: email: ww@ww.ww password: www");
-      yield put(authorActions.SIGN_IN.FAILURE("error"));
-    }
-    // } catch (err) {
-    //   yield put(authorActions.SIGN_IN.FAILURE(err as Object));
+    console.log("payloadS", payload);
+
+    const { data } = yield call(() => axios.post("http://localhost:8062/api/auth/login", payload))
+    const decoded = jwt.verify(data.token, secretKey) as jwt.JwtPayload;
+    const user = decoded.data;
+    yield put(authorActions.SIGN_IN.SUCCESS(user));
+  } catch (err) {
+    yield put(authorActions.SIGN_IN.FAILURE(err as Object));
   } finally {
     cb?.();
   }
@@ -46,12 +24,13 @@ function* singInAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_I
 
 function* singUpAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_UP.REQUEST>) {
   try {
-    // console.log(payload)
-    // payload = email
-    // yield call(() => axios.post("URL", payload))
-    // yield put(authorActions.SIGN_UP.SUCCESS());
-    // console.log(ROUTER_PATH.ACTIVATION);
-    yield put(push(ROUTER_PATH.ACTIVATION));
+    const email = {
+      "email": payload
+    }
+    yield call(() => axios.post("http://localhost:8062/api/auth/", email))
+    yield put(authorActions.SIGN_UP.SUCCESS());
+
+    // yield put(push(ROUTER_PATH.ACTIVATION));
   } catch (err) {
     yield put(authorActions.SIGN_UP.FAILURE(err as Object));
   } finally {
@@ -62,11 +41,13 @@ function* singUpAuthSaga({ payload, cb }: ReturnType<typeof authorActions.SIGN_U
 function* acountActivateAuthSaga({ payload, cb }: ReturnType<typeof authorActions.ACCOUNT_ACTIVATION.REQUEST>) {
   try {
     // payload вся инфа
-
-    // yield call(() => axios.post("URL", payload))
-    console.log(payload);
-
-    yield put(authorActions.SIGN_IN.REQUEST({ email: payload.email, password: payload.password }));
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const decoded = jwt.verify(token as string, secretKey) as jwt.JwtPayload;
+    const email = decoded.email;
+    
+    yield call(() => axios.post(`http://localhost:8062/api/auth/account-activation/?token=${token}`, payload))
+    yield put(authorActions.SIGN_IN.REQUEST({ email: email, password: payload.password }));
   } catch (err) {
     yield put(authorActions.ACCOUNT_ACTIVATION.FAILURE(err as Object));
   } finally {
@@ -89,7 +70,6 @@ function* forgotAuthSaga({ payload, cb }: ReturnType<typeof authorActions.FORGOT
 function* resetAuthSaga({ payload, cb }: ReturnType<typeof authorActions.RESET_PASSWORD.REQUEST>) {
   try {
     // payload = новый пароль и повторнное пароль  + мыло
-
     // yield call(() => axios.post("URL", payload))
     yield put(authorActions.RESET_PASSWORD.SUCCESS());
   } catch (err) {

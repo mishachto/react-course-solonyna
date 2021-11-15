@@ -26,12 +26,9 @@ export default (ComposedComponent: any) => {
     const isAuthenticated = useSelector(getAuthUser());
     const dispatch = useDispatch();
     if (!isAuthenticated) {
-      const token = localStorage.getItem("authUser");
-      if (token) {
-        if (Number(token) === 111) {
-          data.token = token;
-          dispatch(authorActions.SIGN_IN.SUCCESS(data));
-        }
+      const authUser = localStorage.getItem("authUser");
+      if (authUser) {
+        dispatch(authorActions.SIGN_IN.SUCCESS(authUser));
       }
     }
     return true ? <ComposedComponent {...props} /> : <Redirect to="/login" />;

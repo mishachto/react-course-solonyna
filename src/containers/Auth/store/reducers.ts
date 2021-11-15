@@ -8,6 +8,7 @@ const initialstate: IAuthState = {
   authUser: null,
   isAuthentificate: false,
   token: null,
+  modal: false
 };
 
 export const authReducer: IReducer<IAuthState> = (state: IAuthState = initialstate, action) => {
@@ -18,23 +19,23 @@ export const authReducer: IReducer<IAuthState> = (state: IAuthState = initialsta
     case authActionTypes.ACCOUNT_ACTIVATION.REQUEST:
     case authActionTypes.FORGOT_PASSWORD.REQUEST:
     case authActionTypes.RESET_PASSWORD.REQUEST:
-      return { ...state, loading: true, error: null };
+      return { ...state, loading: true, error: null, modal: false };
 
     case authActionTypes.RESET_PASSWORD.SUCCESS:
     case authActionTypes.SIGN_IN.SUCCESS:
     case authActionTypes.ACCOUNT_ACTIVATION.SUCCESS:
       const { user, token } = action.payload;
+      localStorage.setItem("authUser", action.payload)
       return {
         ...state,
         loading: false,
         isAuthentificate: true,
-        authUser: user,
-        token: token,
+        authUser: action.payload,
       };
 
     case authActionTypes.FORGOT_PASSWORD.SUCCESS:
     case authActionTypes.SIGN_UP.SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, modal: true };
 
     case authActionTypes.SIGN_OUT.SUCCESS:
       return initialstate;
@@ -45,7 +46,7 @@ export const authReducer: IReducer<IAuthState> = (state: IAuthState = initialsta
     case authActionTypes.ACCOUNT_ACTIVATION.FAILURE:
     case authActionTypes.FORGOT_PASSWORD.FAILURE:
     case authActionTypes.RESET_PASSWORD.FAILURE:
-      return { ...state, loading: true, error: action.payload.error };
+      return { ...state, loading: true, error: action.payload.error, modal: false };
 
     default:
       return state;

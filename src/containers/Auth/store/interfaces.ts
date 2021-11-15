@@ -5,4 +5,5 @@ export interface IAuthState {
   authUser: null | Partial<IUser>;
   isAuthentificate: boolean;
   token: string | null;
+  modal: boolean;
 }
